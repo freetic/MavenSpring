@@ -8,23 +8,20 @@ import java.util.Date;
 
 @Entity
 @Data
+@NamedQuery(name="Blog.findByUserId", query="select b from Blog b WHERE b.userid = ?1")
 public class Blog {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="WRITEID")
     private Long writeid;
 
-    @Column(name="USERID")
+    @ManyToOne
+    @JoinColumn(name="EMAIL")
+    private User user;
     private String userid;
-
-    @Column(name="CONTENT")
     private String content;
 
-//    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    @Column(name="CREATEAT")
-    private Date createat;
-
-    @Column(name="BLOGNAME")
+    private Date createdat;
+    private String username;
     private String blogname;
 
 }
