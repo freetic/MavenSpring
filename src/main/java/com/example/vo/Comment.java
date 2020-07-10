@@ -8,21 +8,26 @@ import java.util.Date;
 
 @Entity
 @Data
-@NamedQuery(name="Blog.findByUserId", query="select b from Blog b WHERE b.userid = ?1")
-@NamedQuery(name="Blog.findByWriteid", query="select b from Blog b where b.writeid = ?1")
-public class Blog {
+@NamedQuery(name="Comment.findByBlogid", query="select c from Comment c WHERE c.blogid = ?1")
+public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long writeid;
+    private Long commentid;
 
     @ManyToOne
     @JoinColumn(name="EMAIL")
     private User user;
     private String userid;
+    private String username;
     private String content;
 
     @CreationTimestamp
     private Date createdat;
-    private String username;
-    private String blogname;
+
+    @ManyToOne
+    @JoinColumn(name="WRITEID")
+    private Blog blog;
+
+    private Long blogid;
+
 
 }
